@@ -4,7 +4,7 @@ using MyMath;
 namespace MathTests
 {
     [TestClass]
-    public class UnitTests
+    public class CoordArrayTests
     {
         private readonly CoordArray coordArray = new CoordArray();
 
