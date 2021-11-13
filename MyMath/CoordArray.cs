@@ -23,7 +23,7 @@ namespace MyMath
                 for (int j = 0; j < Max; j++)
                 {
                     Random r = new Random();
-                    Arr[i, j] = (i + r.NextDouble(), j + r.NextDouble());
+                    Arr[i, j] = (i + (r.NextDouble() - 0.5), j + (r.NextDouble() - 0.5));
                     idx++;
                 }
             }
@@ -39,7 +39,7 @@ namespace MyMath
                 for (int j = 0; j < Max; j++)
                 {
                     double testDelta = Distance.Euclidean(
-                        new double[] { Math.Floor(Arr[i, j].Item1), Math.Floor(Arr[i, j].Item2) }, 
+                        new double[] { Arr[i, j].Item1, Arr[i, j].Item2 }, 
                         new double[] { expectedResult.Item1, expectedResult.Item2});
                     if (Math.Abs(testDelta) < delta)
                     {
@@ -59,7 +59,7 @@ namespace MyMath
             double delta = double.MaxValue;
             for (int i = 0; i < Max; i++)
             {
-                double testDelta = Math.Abs(Math.Floor(Arr[i, 0].Item1) - expectedResult.Item1);
+                double testDelta = Math.Abs(Arr[i, 0].Item1 - expectedResult.Item1);
                 if (testDelta < delta)
                 {
                     x = i;
@@ -71,7 +71,7 @@ namespace MyMath
             delta = int.MaxValue;
             for (int j = 0; j < Max; j++)
             {
-                double testDelta = Math.Abs(Math.Floor(Arr[x, j].Item2) - expectedResult.Item2);
+                double testDelta = Math.Abs(Arr[x, j].Item2 - expectedResult.Item2);
                 if (testDelta < delta)
                 {
                     y = j;

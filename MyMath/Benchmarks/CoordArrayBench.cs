@@ -1,14 +1,12 @@
 ﻿using BenchmarkDotNet.Attributes;
 
-namespace MyMath
+namespace MyMath.Benchmarks
 {
-    public class Benchmarks
+    public class CoordArrayBench
     {
-        #region CoordArray
-
         private readonly CoordArray coordArray = new CoordArray();
 
-        [Benchmark(Baseline = true)]
+        [Benchmark]
         public void BruteForceBenchmark()
         {
             coordArray.BruteForceFindIndex(CoordArray.SingleIndex);
@@ -19,7 +17,5 @@ namespace MyMath
         {
             coordArray.OptimizedFindIndex(CoordArray.SingleIndex);
         }
-
-        #endregion
     }
 }

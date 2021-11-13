@@ -7,7 +7,7 @@ namespace MyMath
     {
         static void Main(string[] args)
         {
-            var summary = BenchmarkRunner.Run<Benchmarks>();
+            var summary = BenchmarkRunner.Run<Benchmarks.CoordArrayBench>();
             Console.Write(summary);
             Console.ReadKey();
         }
