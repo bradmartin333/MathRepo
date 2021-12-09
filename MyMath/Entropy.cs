@@ -24,6 +24,13 @@ namespace MyMath
             return MathNet.Numerics.Statistics.Statistics.Entropy(redPixels);
         }
 
+        /// <summary>
+        /// This is what lies behind MathNet's Entropy calculation
+        /// </summary>
+        /// <param name="redPixels"></param>
+        /// <returns>
+        /// Calculated Entropy
+        /// </returns>
         public static double SpyCalc(List<double> redPixels)
         {
             Dictionary<double, double> dictionary = new Dictionary<double, double>();
