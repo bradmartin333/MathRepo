@@ -27,7 +27,9 @@ namespace MyMath
         /// <summary>
         /// This is what lies behind MathNet's Entropy calculation
         /// </summary>
-        /// <param name="redPixels"></param>
+        /// <param name="redPixels">
+        /// An image deconstructed into a list of it's Red channel pixel intensities
+        /// </param>
         /// <returns>
         /// Calculated Entropy
         /// </returns>
