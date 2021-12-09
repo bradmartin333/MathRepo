@@ -26,32 +26,25 @@ namespace MyMath
 
         public static double SpyCalc(List<double> redPixels)
         {
-			Dictionary<double, double> dictionary = new Dictionary<double, double>();
-			int num = 0;
-			foreach (double num2 in redPixels)
-			{
-				if (double.IsNaN(num2))
-				{
-					return double.NaN;
-				}
-				double num3;
-				if (dictionary.TryGetValue(num2, out num3))
-				{
-					num3 = (dictionary[num2] = num3 + 1.0);
-				}
-				else
-				{
-					dictionary.Add(num2, 1.0);
-				}
-				num++;
-			}
-			double num4 = 0.0;
-			foreach (KeyValuePair<double, double> keyValuePair in dictionary)
-			{
-				double num5 = keyValuePair.Value / (double)num;
-				num4 += num5 * Math.Log(num5, 2.0);
-			}
-			return -num4;
+            Dictionary<double, double> dictionary = new Dictionary<double, double>();
+            int num = 0;
+            foreach (double num2 in redPixels)
+            {
+                if (double.IsNaN(num2))
+                    return double.NaN;
+                if (dictionary.TryGetValue(num2, out double num3))
+                    num3 = (dictionary[num2] = num3 + 1.0);
+                else
+                    dictionary.Add(num2, 1.0);
+                num++;
+            }
+            double num4 = 0.0;
+            foreach (KeyValuePair<double, double> keyValuePair in dictionary)
+            {
+                double num5 = keyValuePair.Value / (double)num;
+                num4 += num5 * Math.Log(num5, 2.0);
+            }
+            return -num4;
 		}
     }
 }
