@@ -45,6 +45,6 @@ namespace MyMath
                 num4 += num5 * Math.Log(num5, 2.0);
             }
             return -num4;
-		}
+        }
     }
 }
