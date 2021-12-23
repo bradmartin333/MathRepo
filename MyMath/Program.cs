@@ -9,9 +9,11 @@ namespace MyMath
         {
             //var summary = BenchmarkRunner.Run<Benchmarks.CoordArrayBench>();
             //var summary = BenchmarkRunner.Run<Benchmarks.EntropyBench>();
-            var summary = BenchmarkRunner.Run<Benchmarks.SDL800Bench>();
-            Console.Write(summary);
-            Console.ReadKey();
+            //var summary = BenchmarkRunner.Run<Benchmarks.SDL800Bench>();
+            //Console.Write(summary);
+            //Console.ReadKey();
+
+            SpatialGeometry.GenerateLog();
         }
     }
 }
