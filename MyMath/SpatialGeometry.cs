@@ -59,39 +59,18 @@ namespace MyMath
 
         public static void GenerateLevelingInfo()
         {
-            Console.WriteLine($"Plane D: {PLANE.D}");
-            Console.WriteLine($"Theta (rad): {GetThetaInverted(PLANE)}");
-            Console.WriteLine($"Theta (deg): {GetThetaInverted(PLANE, false)}");
-            Console.WriteLine($"Theta (rad): {GetThetaCustom(PLANE)}");
-            Console.WriteLine($"Theta (deg): {GetThetaCustom(PLANE, false)}");
+            Console.WriteLine($"Theta (deg) {GetTheta(PLANE, false)}");
         }
-        public static Point2D GetThetaInverted(Plane plane, bool use_radians = true)
+
+        public static Point2D GetTheta(Plane plane, bool use_radians = true)
         {
             Line3D projectX = plane.Project(new Line3D(new Point3D(0d, 0d, 0d), new Point3D(1d, 0d, 0d)));
             Line3D projectY = plane.Project(new Line3D(new Point3D(0d, 0d, 0d), new Point3D(0d, 1d, 0d)));
-            double THY = -1 * MathNet.Numerics.Trig.Atan((projectX.EndPoint.Z - projectX.StartPoint.Z) / (projectX.EndPoint.X - projectX.StartPoint.X));
-            if (!use_radians) THY = MathNet.Numerics.Trig.RadianToDegree(THY);
-            double THX = -1 * MathNet.Numerics.Trig.Atan((projectY.EndPoint.Z - projectY.StartPoint.Z) / (projectY.EndPoint.Y - projectY.StartPoint.Y));
+            double THX = -1 * MathNet.Numerics.Trig.Atan((projectX.EndPoint.Z - projectX.StartPoint.Z) / (projectX.EndPoint.X - projectX.StartPoint.X));
             if (!use_radians) THX = MathNet.Numerics.Trig.RadianToDegree(THX);
-            return new Point2D(THY, THX); // Tools use THX, THY
-        }
-
-        public static Point2D GetThetaCustom(Plane plane, bool use_radians = true)
-        {
-            Line3D projectX = new Line3D(CustomProject(plane, new Vector3D(0d, 0d, 0d)), CustomProject(plane, new Vector3D(1d, 0d, 0d)));
-            Line3D projectY = new Line3D(CustomProject(plane, new Vector3D(0d, 0d, 0d)), CustomProject(plane, new Vector3D(0d, 1d, 0d)));
-            double THY = -1 * MathNet.Numerics.Trig.Atan((projectX.EndPoint.Z - projectX.StartPoint.Z) / (projectX.EndPoint.X - projectX.StartPoint.X));
+            double THY = -1 * MathNet.Numerics.Trig.Atan((projectY.EndPoint.Z - projectY.StartPoint.Z) / (projectY.EndPoint.Y - projectY.StartPoint.Y));
             if (!use_radians) THY = MathNet.Numerics.Trig.RadianToDegree(THY);
-            double THX = -1 * MathNet.Numerics.Trig.Atan((projectY.EndPoint.Z - projectY.StartPoint.Z) / (projectY.EndPoint.Y - projectY.StartPoint.Y));
-            if (!use_radians) THX = MathNet.Numerics.Trig.RadianToDegree(THX);
-            return new Point2D(THY, THX); // Tools use THX, THY
-        }
-
-        public static Point3D CustomProject(Plane plane, Vector3D p)
-        {
-            double num = plane.Normal.DotProduct(p);
-            Vector3D vector = (num + plane.D) * plane.Normal;
-            return p.ToPoint3D() - vector;
+            return new Point2D(THX, THY);
         }
     }   
 }

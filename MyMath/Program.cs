@@ -7,15 +7,11 @@ namespace MyMath
     {
         static void Main(string[] args)
         {
-            //var summary = BenchmarkRunner.Run<Benchmarks.CoordArrayBench>();
-            //var summary = BenchmarkRunner.Run<Benchmarks.EntropyBench>();
-            //var summary = BenchmarkRunner.Run<Benchmarks.SDL800Bench>();
+            //var summary = BenchmarkRunner.Run<Benchmarks.SpatialGeometryBench>();
             //Console.Write(summary);
             //Console.ReadKey();
 
-            SpatialGeometry.GenerateLog();
             SpatialGeometry.GenerateLevelingInfo();
-            Console.ReadKey();
         }
     }
 }
