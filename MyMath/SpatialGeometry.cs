@@ -10,10 +10,7 @@ namespace MyMath
     public static class SpatialGeometry
     {
         private static string PATH = @"C:\Repos\Rustbox\tests\files\";
-
-        // From Rust Output
-        // Normal: Vec3 { x: 0.45953159245879155, y: 0.6684095890309693, z: 0.5848583904021021 }
-        private static UnitVector3D UNIT_VECTOR = UnitVector3D.Create(0.45953159245879155, 0.6684095890309693, 0.5848583904021021);
+        private static Plane PLANE = Plane.FromPoints(new Point3D(6, 4, -1), new Point3D(1, -8, 3), new Point3D(2, 1, -4));
 
         public static void ParseLog()
         {
@@ -32,20 +29,18 @@ namespace MyMath
                 points.Average(p => p.Z));
 
             Console.WriteLine(centoid.ToString());
-            Console.ReadKey();
         }
 
         public static void GenerateLog()
         {
             StringBuilder stringBuilder = new StringBuilder();
-            Plane plane = Plane.FromPoints(new Point3D(1, 2, -2), new Point3D(3, -2, 1), new Point3D(5, 1, -4));
             List<Point3D> points = new List<Point3D>();
 
             for (int i = 0; i < 100; i++)
             {
                 for (int j = 0; j < 100; j++)
                 {
-                    Point3D projected = new Point3D(i, j, 0).ProjectOn(plane);
+                    Point3D projected = new Point3D(i, j, 0).ProjectOn(PLANE);
                     points.Add(projected);
                     stringBuilder.Append($"{projected.X}\t{projected.Y}\t{projected.Z}\n");
                 }
@@ -58,16 +53,24 @@ namespace MyMath
                 points.Average(p => p.Y),
                 points.Average(p => p.Z));
 
-            Plane plane1 = new Plane(centoid, UNIT_VECTOR);
-
-            Point3D a = new Point3D(1, 2, -2);
-            Point3D b = new Point3D(3, -2, 1);
-            Point3D c = new Point3D(5, 1, -4);
-
-            Console.WriteLine(a.ProjectOn(plane1).ToString());
-            Console.WriteLine(b.ProjectOn(plane1).ToString());
-            Console.WriteLine(c.ProjectOn(plane1).ToString());
-            Console.ReadKey();
+            Console.WriteLine($"Centroid: {centoid}");
+            Console.WriteLine($"Normal: {PLANE.Normal}");
         }
-    }
+
+        public static void GenerateLevelingInfo()
+        {
+            Console.WriteLine($"Theta (rad): {GetThetaInverted(PLANE)}");
+            Console.WriteLine($"Theta (deg): {GetThetaInverted(PLANE, false)}");
+        }
+        public static Point2D GetThetaInverted(Plane plane, bool use_radians = true)
+        {
+            Line3D projectX = plane.Project(new Line3D(new Point3D(0d, 0d, 0d), new Point3D(1d, 0d, 0d)));
+            Line3D projectY = plane.Project(new Line3D(new Point3D(0d, 0d, 0d), new Point3D(0d, 1d, 0d)));
+            double THY = -1 *MathNet.Numerics.Trig.Atan((projectX.EndPoint.Z - projectX.StartPoint.Z) / (projectX.EndPoint.X - projectX.StartPoint.X));
+            if (!use_radians) THY = MathNet.Numerics.Trig.RadianToDegree(THY);
+            double THX = -1 *MathNet.Numerics.Trig.Atan((projectY.EndPoint.Z - projectY.StartPoint.Z) / (projectY.EndPoint.Y - projectY.StartPoint.Y));
+            if (!use_radians) THX = MathNet.Numerics.Trig.RadianToDegree(THX);
+            return new Point2D(THY, THX); // Tools use THX, THY
+        }
+    }   
 }

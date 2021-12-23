@@ -14,6 +14,8 @@ namespace MyMath
             //Console.ReadKey();
 
             SpatialGeometry.GenerateLog();
+            SpatialGeometry.GenerateLevelingInfo();
+            Console.ReadKey();
         }
     }
 }
