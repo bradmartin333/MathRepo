@@ -7,11 +7,9 @@ namespace MyMath
     {
         static void Main(string[] args)
         {
-            //var summary = BenchmarkRunner.Run<Benchmarks.SpatialGeometryBench>();
-            //Console.Write(summary);
-            //Console.ReadKey();
-
-            SpatialGeometry.GenerateLevelingInfo();
+            var summary = BenchmarkRunner.Run<Benchmarks.SpatialGeometryBench>();
+            Console.Write(summary);
+            Console.ReadKey();
         }
     }
 }

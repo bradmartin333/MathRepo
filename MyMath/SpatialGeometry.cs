@@ -59,7 +59,7 @@ namespace MyMath
 
         public static void GenerateLevelingInfo()
         {
-            Console.WriteLine($"Theta (deg) {GetTheta(PLANE, false)}");
+            _ = GetTheta(Plane.FromPoints(new Point3D(6, 4, -1), new Point3D(1, -8, 3), new Point3D(2, 1, -4)), false);
         }
 
         public static Point2D GetTheta(Plane plane, bool use_radians = true)
